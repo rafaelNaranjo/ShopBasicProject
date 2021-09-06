@@ -1,0 +1,388 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "ShopCart",
+    "contact": {}
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/job/execute": {
+      "post": {
+        "summary": "Job Execute",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "JobExecute",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/products/all": {
+      "get": {
+        "summary": "Products Filter",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "ProductsFilter",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "price",
+            "in": "query",
+            "required": true,
+            "type": "number",
+            "format": "double",
+            "description": ""
+          },
+          {
+            "name": "priceEnd",
+            "in": "query",
+            "required": true,
+            "type": "number",
+            "format": "double",
+            "description": ""
+          },
+          {
+            "name": "brand",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/products/7/validate/qty/4": {
+      "post": {
+        "summary": "Product Validate Qty",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "ProductValidateQty",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/cart/new": {
+      "post": {
+        "summary": "Cart New",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "CartNew",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/CartNewRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/cart/30": {
+      "get": {
+        "summary": "Cart GetById",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "CartGetById",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/cart/update": {
+      "put": {
+        "summary": "Cart Update",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "CartUpdate",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/CartUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/cart/30/complete": {
+      "post": {
+        "summary": "Cart Complete",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "CartComplete",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CartNewRequest": {
+      "title": "CartNewRequest",
+      "example": {
+        "items": [
+          {
+            "product": {
+              "id": 7
+            },
+            "qty": 4
+          }
+        ],
+        "total": 1396000.0,
+        "state": "CREATED"
+      },
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Item"
+          }
+        },
+        "total": {
+          "type": "number",
+          "format": "double"
+        },
+        "state": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "items",
+        "total",
+        "state"
+      ]
+    },
+    "Item": {
+      "title": "Item",
+      "example": {
+        "product": {
+          "id": 7
+        },
+        "qty": 4
+      },
+      "type": "object",
+      "properties": {
+        "product": {
+          "$ref": "#/definitions/Product"
+        },
+        "qty": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "product",
+        "qty"
+      ]
+    },
+    "Product": {
+      "title": "Product",
+      "example": {
+        "id": 7
+      },
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "CartUpdateRequest": {
+      "title": "CartUpdateRequest",
+      "example": {
+        "id": 30,
+        "items": [],
+        "total": 0,
+        "state": "CREATED"
+      },
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "state": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "items",
+        "total",
+        "state"
+      ]
+    },
+    "CartUpdatewithproductsRequest": {
+      "title": "CartUpdatewithproductsRequest",
+      "example": {
+        "id": 30,
+        "items": [
+          {
+            "product": {
+              "id": 7
+            },
+            "qty": 4
+          }
+        ],
+        "total": 1396000.0,
+        "state": "CREATED"
+      },
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Item"
+          }
+        },
+        "total": {
+          "type": "number",
+          "format": "double"
+        },
+        "state": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "items",
+        "total",
+        "state"
+      ]
+    }
+  },
+  "tags": [
+    {
+      "name": "Misc",
+      "description": ""
+    }
+  ]
+}
